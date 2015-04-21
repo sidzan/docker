@@ -17,7 +17,7 @@ func (s *MemoryGroup) Set(d *data) error {
 logrus.Debugf("!!!!!!!!!!!!!     inside memory set")
 	dir, err := d.join("memory")
 	// only return an error for memory if it was specified
-	logrus.Debugf("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!above the check funciont")
+	logrus.Debugf("This issijan!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!above the check funciont")
 	if err != nil && (d.c.Memory != 0 || d.c.MemoryReservation != 0 || d.c.MemorySwap != 0) {
 		 logrus.Debugf("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! inside the check function")
 		return err
