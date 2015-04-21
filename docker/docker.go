@@ -25,6 +25,7 @@ const (
 )
 
 func main() {
+	log.Debugf("XXXXXXXXXXX called docker.main")
 	if reexec.Init() {
 		return
 	}
@@ -35,6 +36,7 @@ func main() {
 	if *flVersion {
 		showVersion()
 		return
+
 	}
 
 	if *flLogLevel != "" {
@@ -68,6 +70,7 @@ func main() {
 	}
 
 	if *flDaemon {
+		log.Debugf("xxxxxxxxxxxxxx calling main daemon from docker")
 		mainDaemon()
 		return
 	}
@@ -135,5 +138,6 @@ func main() {
 }
 
 func showVersion() {
+	log.Debugf("xxxxxxxxxxxxxxxxxxxxxxxxxxxx calling show version from docker")
 	fmt.Printf("Docker version %s, build %s\n", dockerversion.VERSION, dockerversion.GITCOMMIT)
 }

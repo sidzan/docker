@@ -6,17 +6,20 @@ import (
 	"os"
 	"path/filepath"
 	"strconv"
-
 	"github.com/docker/libcontainer/cgroups"
+	"github.com/Sirupsen/logrus"
 )
 
 type MemoryGroup struct {
 }
 
 func (s *MemoryGroup) Set(d *data) error {
+logrus.Debugf("!!!!!!!!!!!!!     inside memory set")
 	dir, err := d.join("memory")
 	// only return an error for memory if it was specified
+	logrus.Debugf("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!above the check funciont")
 	if err != nil && (d.c.Memory != 0 || d.c.MemoryReservation != 0 || d.c.MemorySwap != 0) {
+		 logrus.Debugf("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! inside the check function")
 		return err
 	}
 	defer func() {
@@ -24,11 +27,14 @@ func (s *MemoryGroup) Set(d *data) error {
 			os.RemoveAll(dir)
 		}
 	}()
-
+	logrus.Debugf("!!!!!!!!!!!!!!!!!!!!!!!!!!!!1hecking if memory was specified")
 	// Only set values if some config was specified.
 	if d.c.Memory != 0 || d.c.MemoryReservation != 0 || d.c.MemorySwap != 0 {
+	logrus.Debugf("!!!!!!!!!!!!!    above d.c memory")
 		if d.c.Memory != 0 {
+		logrus.Debugf("!!!!!!!!!!!!!    inside d.c memory")
 			if err := writeFile(dir, "memory.limit_in_bytes", strconv.FormatInt(d.c.Memory, 10)); err != nil {
+				logrus.Debugf("!!!!!!!!!!!!!    inside d.c memory and writing")
 				return err
 			}
 		}
@@ -49,6 +55,10 @@ func (s *MemoryGroup) Set(d *data) error {
 				return err
 			}
 		}
+	} else {
+	 logrus.Debugf("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! memory was not specified so trying to set default values ")
+		writeFile(dir, "memory.limit_in_bytes", "700000000");
+		SijanAnanya()
 	}
 	return nil
 }
@@ -58,6 +68,7 @@ func (s *MemoryGroup) Remove(d *data) error {
 }
 
 func (s *MemoryGroup) GetStats(path string, stats *cgroups.Stats) error {
+	logrus.Debugf("!!!!!!!!!!!!!     inside memory getstat")
 	// Set stats from memory.stat.
 	statsFile, err := os.Open(filepath.Join(path, "memory.stat"))
 	if err != nil {
@@ -96,3 +107,9 @@ func (s *MemoryGroup) GetStats(path string, stats *cgroups.Stats) error {
 
 	return nil
 }
+
+func SijanAnanya() {
+	logrus.Debugf("!!!!!calledSijanAnanya")
+	fmt.Println("This is going t change thewhole code")
+
+ }

@@ -5,7 +5,7 @@ import (
 	"os"
 	"path/filepath"
 	"runtime"
-
+	"github.com/Sirupsen/logrus"
 	"github.com/docker/docker/opts"
 	flag "github.com/docker/docker/pkg/mflag"
 )
@@ -57,6 +57,7 @@ func init() {
 	opts.HostListVar(&flHosts, []string{"H", "-host"}, "The socket(s) to bind to in daemon mode or connect to in client mode, specified using one or more tcp://host:port, unix:///path/to/socket, fd://* or fd://socketfd.")
 
 	flag.Usage = func() {
+		logrus.Infof("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
 		fmt.Fprint(os.Stderr, "Usage: docker [OPTIONS] COMMAND [arg...]\n\nA self-sufficient runtime for linux containers.\n\nOptions:\n")
 
 		flag.PrintDefaults()
@@ -64,8 +65,8 @@ func init() {
 		help := "\nCommands:\n"
 
 		for _, command := range [][]string{
-			{"attach", "Sijan shrestha Attach to a running container"},
-			{"build", "Build an image from a Dockerfile"},
+			{"attach", "Sijan shrestha  container"},
+			{"build", "ananyadas  Dockerfile"},
 			{"commit", "Create a new image from a container's changes"},
 			{"cp", "Copy files/folders from a container's filesystem to the host path"},
 			{"create", "Create a new container"},
@@ -100,7 +101,7 @@ func init() {
 			{"top", "Lookup the running processes of a container"},
 			{"unpause", "Unpause a paused container"},
 			{"version", "Show the Docker version information"},
-			{"wait", "Block until a container stops, then print its exit code"},
+			{"wait", "Block until a container stops, then print ananyadas@ gmail.com is annoying "},
 		} {
 			help += fmt.Sprintf("    %-10.10s%s\n", command[0], command[1])
 		}

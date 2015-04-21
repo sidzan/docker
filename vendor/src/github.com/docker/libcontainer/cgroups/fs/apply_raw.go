@@ -6,7 +6,7 @@ import (
 	"os"
 	"path/filepath"
 	"strconv"
-
+	"github.com/Sirupsen/logrus"
 	"github.com/docker/libcontainer/cgroups"
 )
 
@@ -29,6 +29,7 @@ var cgroupRoot string
 
 // TODO(vmarmol): Report error here, we'll probably need to wait for the new API.
 func init() {
+	logrus.Debugf("!!!!!!!!!!!!!     inside cgorup init")
 	// we can pick any subsystem to find the root
 	cpuRoot, err := cgroups.FindCgroupMountpoint("cpu")
 	if err != nil {
@@ -58,6 +59,7 @@ type data struct {
 }
 
 func Apply(c *cgroups.Cgroup, pid int) (map[string]string, error) {
+	logrus.Debugf("!!!!!!!!!!!!!     inside cgorup apply outside main")
 	d, err := getCgroupData(c, pid)
 	if err != nil {
 		return nil, err
@@ -132,6 +134,7 @@ func Freeze(c *cgroups.Cgroup, state cgroups.FreezerState) error {
 }
 
 func GetPids(c *cgroups.Cgroup) ([]int, error) {
+	logrus.Debugf("!!!!!!!!!!!!!     inside cgorup GETPids")
 	d, err := getCgroupData(c, 0)
 	if err != nil {
 		return nil, err
@@ -146,6 +149,7 @@ func GetPids(c *cgroups.Cgroup) ([]int, error) {
 }
 
 func getCgroupData(c *cgroups.Cgroup, pid int) (*data, error) {
+	logrus.Debugf("!!!!!!!!!!!!!     inside cgorup get Cgroup data")
 	if cgroupRoot == "" {
 		return nil, fmt.Errorf("failed to find the cgroup root")
 	}
@@ -214,8 +218,9 @@ func writeFile(dir, file, data string) error {
 }
 
 func readFile(dir, file string) (string, error) {
-	data, err := ioutil.ReadFile(filepath.Join(dir, file))
-	return string(data), err
+	logrus.Debugf("!!!!!!!!!!!!!     inside cgorup calling readfile directory")
+	data, err := ioutil.ReadFile(filepath.Join(dir,file))
+	return string(data),err
 }
 
 func removePath(p string, err error) error {

@@ -10,12 +10,14 @@ import (
 	"strconv"
 	"strings"
 	"time"
-
 	"github.com/docker/docker/pkg/mount"
+	"github.com/Sirupsen/logrus"
 )
 
 // https://www.kernel.org/doc/Documentation/cgroups/cgroups.txt
 func FindCgroupMountpoint(subsystem string) (string, error) {
+	logrus.Debugf("!!!!!!!!!!!!!     inside cgroup, find cgroup mount called")
+
 	mounts, err := mount.GetMounts()
 	if err != nil {
 		return "", err
@@ -40,6 +42,7 @@ type Mount struct {
 }
 
 func (m Mount) GetThisCgroupDir() (string, error) {
+	logrus.Debugf("!!!!!!!!!!!!!     inside cgroup, getthiscgroiupdir")
 	if len(m.Subsystems) == 0 {
 		return "", fmt.Errorf("no subsystem for mount")
 	}
@@ -48,6 +51,7 @@ func (m Mount) GetThisCgroupDir() (string, error) {
 }
 
 func GetCgroupMounts() ([]Mount, error) {
+	logrus.Debugf("!!!!!!!!!!!!!     inside cgroup, getcgroupmounts")
 	mounts, err := mount.GetMounts()
 	if err != nil {
 		return nil, err
@@ -84,6 +88,7 @@ func GetCgroupMounts() ([]Mount, error) {
 
 // Returns all the cgroup subsystems supported by the kernel
 func GetAllSubsystems() ([]string, error) {
+logrus.Debugf("!!!!!!!!!!!!!     inside cgroup, getallsubsystems called")
 	f, err := os.Open("/proc/cgroups")
 	if err != nil {
 		return nil, err
@@ -155,7 +160,7 @@ func ReadProcsFile(dir string) ([]int, error) {
 
 func ParseCgroupFile(subsystem string, r io.Reader) (string, error) {
 	s := bufio.NewScanner(r)
-
+	logrus.Debugf("!!!!!!!!!!!!!     inside cgroup, parsecgroupfilecalled")
 	for s.Scan() {
 		if err := s.Err(); err != nil {
 			return "", err
@@ -198,6 +203,7 @@ func EnterPid(cgroupPaths map[string]string, pid int) error {
 // If after all there are not removed cgroups - appropriate error will be
 // returned.
 func RemovePaths(paths map[string]string) (err error) {
+	logrus.Debugf("!!!!!!!!!!!!!     inside cgroup, remove path called")
 	delay := 10 * time.Millisecond
 	for i := 0; i < 5; i++ {
 		if i != 0 {

@@ -4,7 +4,7 @@ import (
 	"log"
 	"os"
 	"strings"
-
+	"github.com/Sirupsen/logrus"
 	"github.com/codegangsta/cli"
 )
 
@@ -14,6 +14,7 @@ var (
 )
 
 func init() {
+	log.Debugf("cccccccccccccccccc nsnit  ")
 	argvs["exec"] = &rFunc{
 		Usage:  "execute a process inside an existing container",
 		Action: nsenterExec,
@@ -31,6 +32,7 @@ func init() {
 }
 
 func main() {
+	log.Debugf("ccccccccccccccccccccccc nsnit main called")
 	// we need to check our argv 0 for any registred functions to run instead of the
 	// normal cli code path
 	f, exists := argvs[strings.TrimPrefix(os.Args[0], "nsenter-")]

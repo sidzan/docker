@@ -69,6 +69,9 @@ func (job *Job) Run() error {
 	}
 	// Log beginning and end of the job
 	if job.Eng.Logging {
+		log.Debugf("xxxxxxxxxxxxxxxxxxxxxxxxxxxx is logrus debugf")
+		log.Debugf("xxxxxxxxxxxxxxxxxxxxxxxxxxxx is log debugf")
+		log.Infof("xxxxxxxxxxxxxxx is log infof")
 		log.Infof("+job %s", job.CallString())
 		defer func() {
 			log.Infof("-job %s%s", job.CallString(), job.StatusString())

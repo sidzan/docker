@@ -6,7 +6,8 @@ import (
 	"io/ioutil"
 	"path/filepath"
 	"strconv"
-	"strings"
+	"github.com/Sirupsen/logrus"	
+"strings"
 )
 
 var (
@@ -17,6 +18,7 @@ var (
 // Saturates negative values at zero and returns a uint64.
 // Due to kernel bugs, some of the memory cgroup stats can be negative.
 func parseUint(s string, base, bitSize int) (uint64, error) {
+	logrus.Debugf("!!!!!!!!!!!!!     inside utisl parsee unit")
 	value, err := strconv.ParseUint(s, base, bitSize)
 	if err != nil {
 		intValue, intErr := strconv.ParseInt(s, base, bitSize)

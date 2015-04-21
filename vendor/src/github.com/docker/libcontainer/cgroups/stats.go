@@ -1,5 +1,7 @@
 package cgroups
 
+import "github.com/Sirupsen/logrus"
+
 type ThrottlingData struct {
 	// Number of periods with throttling active
 	Periods uint64 `json:"periods,omitempty"`
@@ -68,6 +70,7 @@ type Stats struct {
 }
 
 func NewStats() *Stats {
+	logrus.Debugf("!!!!!!!!!!!!!     inside stats newstats")
 	memoryStats := MemoryStats{Stats: make(map[string]uint64)}
 	return &Stats{MemoryStats: memoryStats}
 }

@@ -23,6 +23,7 @@ var (
 )
 
 func init() {
+	log.Debugf("xxxxxxxxx installing flags")
 	daemonCfg.InstallFlags()
 }
 

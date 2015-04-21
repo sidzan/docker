@@ -2,7 +2,7 @@ package daemon
 
 import (
 	"fmt"
-
+	"github.com/Sirupsen/logrus"
 	"github.com/docker/docker/engine"
 	"github.com/docker/docker/graph"
 	"github.com/docker/docker/image"
@@ -12,6 +12,7 @@ import (
 )
 
 func (daemon *Daemon) ContainerCreate(job *engine.Job) engine.Status {
+	logrus.Debugf("xxxxxxxxxxxxxxxxxxxxxxxxxxxx contanercreate called")
 	var name string
 	if len(job.Args) == 1 {
 		name = job.Args[0]
@@ -66,6 +67,7 @@ func (daemon *Daemon) ContainerCreate(job *engine.Job) engine.Status {
 
 // Create creates a new container from the given configuration with a given name.
 func (daemon *Daemon) Create(config *runconfig.Config, hostConfig *runconfig.HostConfig, name string) (*Container, []string, error) {
+logrus.Debugf("xxxxxxxxxxxxxxxxxxxxxxxxxxxx create called inside of daemon package")
 	var (
 		container *Container
 		warnings  []string

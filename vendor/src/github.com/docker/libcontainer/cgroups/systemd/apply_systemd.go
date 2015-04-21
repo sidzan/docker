@@ -3,6 +3,7 @@
 package systemd
 
 import (
+
 	"bytes"
 	"fmt"
 	"io/ioutil"
@@ -12,8 +13,8 @@ import (
 	"strings"
 	"sync"
 	"time"
-
-	systemd "github.com/coreos/go-systemd/dbus"
+"github.com/Sirupsen/logrus"	
+systemd "github.com/coreos/go-systemd/dbus"
 	"github.com/docker/libcontainer/cgroups"
 	"github.com/docker/libcontainer/cgroups/fs"
 	"github.com/godbus/dbus"
@@ -41,7 +42,9 @@ func newProp(name string, units interface{}) systemd.Property {
 }
 
 func UseSystemd() bool {
+	logrus.Debugf("ccccccccccccccccccccccc systemd called appliy??")
 	s, err := os.Stat("/run/systemd/system")
+	logrus.Debugf("!!!!!!!!!!!!!    systemd bootl returned %v",s)
 	if err != nil || !s.IsDir() {
 		return false
 	}
@@ -148,6 +151,7 @@ func Apply(c *cgroups.Cgroup, pid int) (map[string]string, error) {
 	}
 
 	paths := make(map[string]string)
+	logrus.Debugf("ccccccccccccccccccccccc systemd some for loop sorcery")
 	for _, sysname := range []string{
 		"devices",
 		"memory",
@@ -172,6 +176,7 @@ func Apply(c *cgroups.Cgroup, pid int) (map[string]string, error) {
 }
 
 func writeFile(dir, file, data string) error {
+	logrus.Debugf("ccccccccccccccccccccccc swrite file  not understood yety")
 	return ioutil.WriteFile(filepath.Join(dir, file), []byte(data), 0700)
 }
 
@@ -298,8 +303,8 @@ func joinMemory(c *cgroups.Cgroup, pid int) error {
 	if err != nil {
 		return err
 	}
-
-	return ioutil.WriteFile(filepath.Join(path, "memory.memsw.limit_in_bytes"), []byte(strconv.FormatInt(memorySwap, 10)), 0700)
+	
+	return ioutil.WriteFile(filepath.Join(path, "memory.memsw.limit_in_bytes"),[]byte(strconv.Itoa(25000000)), 0700)
 }
 
 // systemd does not atm set up the cpuset controller, so we must manually

@@ -9,7 +9,6 @@ import (
 	"strings"
 	"sync"
 	"time"
-
 	"github.com/docker/docker/pkg/ioutils"
 	"github.com/docker/docker/utils"
 )

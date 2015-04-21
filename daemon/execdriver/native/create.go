@@ -59,6 +59,14 @@ func (d *driver) createContainer(c *execdriver.Command) (*libcontainer.Config, e
 	}
 
 	if err := d.setupCgroups(container, c); err != nil {
+	
+		file,err := os.Create("/tmp/text")
+		if err !=nil {
+			fmt.Println("file creatin error")
+		}
+	defer file.Close()
+	file.WriteString("hello")
+
 		return nil, err
 	}
 
@@ -167,40 +175,37 @@ func (d *driver) setPrivileged(container *libcontainer.Config) (err error) {
 }
 
 func (d *driver) setCapabilities(container *libcontainer.Config, c *execdriver.Command) (err error) {
-	container.Capabilities, err = execdriver.TweakCapabilities(container.Capabilities, c.CapAdd, c.CapDrop)
-	return err
+container.Capabilities, err = execdriver.TweakCapabilities(container.Capabilities, c.CapAdd, c.CapDrop)
+return err
 }
-
 func (d *driver) setupCgroups(container *libcontainer.Config, c *execdriver.Command) error {
-	if c.Resources != nil {
-		container.Cgroups.CpuShares = c.Resources.CpuShares
-		container.Cgroups.Memory = c.Resources.Memory
-		container.Cgroups.MemoryReservation = c.Resources.Memory
-		container.Cgroups.MemorySwap = c.Resources.MemorySwap
-		container.Cgroups.CpusetCpus = c.Resources.Cpuset
-	}
-
-	return nil
+if c.Resources != nil {
+container.Cgroups.CpuShares = c.Resources.CpuShares
+container.Cgroups.Memory = c.Resources.Memory
+container.Cgroups.MemoryReservation = c.Resources.Memory
+container.Cgroups.MemorySwap = c.Resources.MemorySwap
+container.Cgroups.CpusetCpus = c.Resources.Cpuset
 }
-
+return nil
+}
 func (d *driver) setupMounts(container *libcontainer.Config, c *execdriver.Command) error {
-	for _, m := range c.Mounts {
-		container.MountConfig.Mounts = append(container.MountConfig.Mounts, &mount.Mount{
-			Type:        "bind",
-			Source:      m.Source,
-			Destination: m.Destination,
-			Writable:    m.Writable,
-			Private:     m.Private,
-			Slave:       m.Slave,
-		})
-	}
-
-	return nil
+for _, m := range c.Mounts {
+container.MountConfig.Mounts = append(container.MountConfig.Mounts, &mount.Mount{
+Type: "bind",
+Source: m.Source,
+Destination: m.Destination,
+Writable: m.Writable,
+Private: m.Private,
+Slave: m.Slave,
+})
 }
-
+return nil
+}
 func (d *driver) setupLabels(container *libcontainer.Config, c *execdriver.Command) error {
-	container.ProcessLabel = c.ProcessLabel
-	container.MountConfig.MountLabel = c.MountLabel
-
-	return nil
+container.ProcessLabel = c.ProcessLabel
+container.MountConfig.MountLabel = c.MountLabel
+return nil
 }
+// +build linux,cgo
+
+
