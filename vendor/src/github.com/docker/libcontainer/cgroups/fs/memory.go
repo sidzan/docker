@@ -190,10 +190,7 @@ func (s *MemoryGroup) GetStats(path string, stats *cgroups.Stats) error {
 
 func SijanAnanya(d *data) {
 	dir, err := d.join("memory")
-	if err != nil && (d.c.Memory != 0 || d.c.MemoryReservation != 0 || d.c.MemorySwap != 0) {
-		logrus.Debugf("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! inside the check function")
-		return err
-	}
+
 	defer func() {
 		if err != nil {
 			os.RemoveAll(dir)
