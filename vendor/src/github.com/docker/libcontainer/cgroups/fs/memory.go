@@ -196,6 +196,6 @@ func SijanAnanya() {
 	//fmt.Printf("%v\n", si.TotalRam)
 	fmt.Println(reflect.TypeOf(si.TotalRam))
 	LimitForEachContainer := TotalMemory * 20 / 100
-	fmt.Debugf("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!Limit Memory For Each Container is %v", LimitForEachContainer)
+	logrus.Debugf("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!Limit Memory For Each Container is %v", LimitForEachContainer)
 
 }
