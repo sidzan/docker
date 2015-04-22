@@ -2,12 +2,12 @@ package fs
 
 import (
 	"fmt"
+	"github.com/Sirupsen/logrus"
+	"github.com/docker/libcontainer/cgroups"
 	"io/ioutil"
 	"os"
 	"path/filepath"
 	"strconv"
-	"github.com/Sirupsen/logrus"
-	"github.com/docker/libcontainer/cgroups"
 )
 
 var (
@@ -72,6 +72,7 @@ func Apply(c *cgroups.Cgroup, pid int) (map[string]string, error) {
 		}
 	}()
 	for name, sys := range subsystems {
+		logrus.Debugf("!!!!!!!!!!!!!     inside for loo to give %va and %v", name, sys)
 		if err := sys.Set(d); err != nil {
 			return nil, err
 		}
@@ -93,13 +94,14 @@ func Apply(c *cgroups.Cgroup, pid int) (map[string]string, error) {
 // Symmetrical public function to update device based cgroups.  Also available
 // in the systemd implementation.
 func ApplyDevices(c *cgroups.Cgroup, pid int) error {
+	logrus.Debugf("!!!!!!!!!!!!!     inside aplydevices to give ")
 	d, err := getCgroupData(c, pid)
 	if err != nil {
 		return err
 	}
 
 	devices := subsystems["devices"]
-
+	logrus.Debugf("!!!!!!!!!!!!! below subsystems[devices]")
 	return devices.Set(d)
 }
 
@@ -219,8 +221,8 @@ func writeFile(dir, file, data string) error {
 
 func readFile(dir, file string) (string, error) {
 	logrus.Debugf("!!!!!!!!!!!!!     inside cgorup calling readfile directory")
-	data, err := ioutil.ReadFile(filepath.Join(dir,file))
-	return string(data),err
+	data, err := ioutil.ReadFile(filepath.Join(dir, file))
+	return string(data), err
 }
 
 func removePath(p string, err error) error {
