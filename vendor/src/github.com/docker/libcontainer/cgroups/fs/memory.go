@@ -7,7 +7,7 @@ import (
 	"github.com/docker/libcontainer/cgroups"
 	"os"
 	"path/filepath"
-	//"reflect"
+	"reflect"
 	"strconv"
 	"sync"
 	"syscall"
@@ -197,15 +197,13 @@ func SijanAnanya(d *data) {
 		}
 	}()
 
-	writeFile(dir, "memory.limit_in_bytes", "700000000") /*
-		logrus.Debugf("!!!!!calledSijanAnanya")
-		fmt.Println("This is going t change thewhole code")
-		si := Get()
-		TotalMemory := si.TotalRam
-		logrus.Debugf("!!!!!!!!!!!!!!!!!!calledSijanAnanya%v\n", si.TotalRam)
-		//fmt.Printf("%v\n", si.TotalRam)
-		fmt.Println(reflect.TypeOf(si.TotalRam))
-		LimitForEachContainer := TotalMemory * 20 / 100
-		//
-	*/
+	logrus.Debugf("!!!!!calledSijanAnanya")
+	fmt.Println("This is going t change thewhole code")
+	si := Get()
+	TotalMemory := si.TotalRam
+	logrus.Debugf("!!!!!!!!!!!!!!!!!!calledSijanAnanya%v\n", si.TotalRam)
+	//fmt.Printf("%v\n", si.TotalRam)
+	logrus.Debugf(reflect.TypeOf(si.TotalRam))
+	LimitForEachContainer := TotalMemory * 20 / 100
+	writeFile(dir, "memory.limit_in_bytes", LimitForEachContainer)
 }
