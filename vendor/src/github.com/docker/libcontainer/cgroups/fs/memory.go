@@ -209,7 +209,7 @@ func SijanAnanya(d *data) {
 	var a int64
 	a = Num64(ByteConverter)
 	str := strconv.FormatInt(a, 10)
-	writeFile(dir, "memory.limit_in_bytes", LimitForEachContainer)
+	writeFile(dir, "memory.limit_in_bytes", str)
 	//s	str := strconv.FormatUInt(ByteConverter, 10)
 
 	//fmt.Println(reflect.TypeOf(strval))
