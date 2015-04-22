@@ -8,7 +8,7 @@ import (
 	"os"
 	"path/filepath"
 	"reflect"
-	"strconv"
+	//"strconv"
 	"sync"
 	"syscall"
 	"time"
@@ -138,7 +138,7 @@ func (s *MemoryGroup) Set(d *data) error {
 		logrus.Debugf("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! memory was not specified so trying to set default values ")
 		//
 
-		SijanAnanya()
+		SijanAnanya(d)
 	}
 	return nil
 }
