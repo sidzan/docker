@@ -136,7 +136,8 @@ func (s *MemoryGroup) Set(d *data) error {
 		}
 	} else {
 		logrus.Debugf("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! memory was not specified so trying to set default values ")
-		writeFile(dir, "memory.limit_in_bytes", "700000000")
+		//
+
 		SijanAnanya()
 	}
 	return nil
@@ -187,15 +188,27 @@ func (s *MemoryGroup) GetStats(path string, stats *cgroups.Stats) error {
 	return nil
 }
 
-func SijanAnanya() {
-	logrus.Debugf("!!!!!calledSijanAnanya")
-	fmt.Println("This is going t change thewhole code")
-	si := Get()
-	TotalMemory := si.TotalRam
-	logrus.Debugf("!!!!!!!!!!!!!!!!!!calledSijanAnanya%v\n", si.TotalRam)
-	//fmt.Printf("%v\n", si.TotalRam)
-	fmt.Println(reflect.TypeOf(si.TotalRam))
-	LimitForEachContainer := TotalMemory * 20 / 100
-	logrus.Debugf("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!Limit Memory For Each Container is %v", LimitForEachContainer)
+func SijanAnanya(d *data) {
+	dir, err := d.join("memory")
+	if err != nil && (d.c.Memory != 0 || d.c.MemoryReservation != 0 || d.c.MemorySwap != 0) {
+		logrus.Debugf("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! inside the check function")
+		return err
+	}
+	defer func() {
+		if err != nil {
+			os.RemoveAll(dir)
+		}
+	}()
 
+	writeFile(dir, "memory.limit_in_bytes", "700000000") /*
+		logrus.Debugf("!!!!!calledSijanAnanya")
+		fmt.Println("This is going t change thewhole code")
+		si := Get()
+		TotalMemory := si.TotalRam
+		logrus.Debugf("!!!!!!!!!!!!!!!!!!calledSijanAnanya%v\n", si.TotalRam)
+		//fmt.Printf("%v\n", si.TotalRam)
+		fmt.Println(reflect.TypeOf(si.TotalRam))
+		LimitForEachContainer := TotalMemory * 20 / 100
+		//
+	*/
 }
