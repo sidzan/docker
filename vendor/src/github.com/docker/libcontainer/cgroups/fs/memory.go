@@ -10,9 +10,6 @@ import (
 	"path/filepath"
 	//	"reflect"
 	"strconv"
-	"sync"
-	"syscall"
-	"time"
 )
 
 /*
@@ -201,7 +198,7 @@ func SijanAnanya(d *data) {
 
 	logrus.Debugf("!!!!!calledSijanAnanya")
 	fmt.Println("This is going t change thewhole code")
-	si := Get()
+	si := LimitMemory.Get()
 	TotalMemory := si.TotalRam
 	logrus.Debugf("!!!!!!!!!!!!!!!!!!calledSijanAnanya%v\n", si.TotalRam)
 	//fmt.Printf("%v\n", si.TotalRam)
