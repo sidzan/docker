@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"github.com/Sirupsen/logrus"
 	"github.com/docker/libcontainer/cgroups"
-	"github.com/memoryLimitBySijan"
+	//"github.com/memoryLimitBySijan"
 	"os"
 	"path/filepath"
 
