@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/Sirupsen/logrus"
 	"github.com/docker/libcontainer/cgroups"
+	"github.com/memoryLimitBySijan"
 	"os"
 	"path/filepath"
 	//	"reflect"
@@ -14,6 +15,7 @@ import (
 	"time"
 )
 
+/*
 type SI struct {
 	Uptime       time.Duration // time since boot
 	Loads        [3]float64    // 1, 5, and 15 minute load averages, see e.g. UPTIME(1)
@@ -77,7 +79,7 @@ func (si *SI) ToString() string {
 	si.mu.Lock()
 	return si.String()
 }
-
+*/
 /*func main() {
 
 	si := Get()
