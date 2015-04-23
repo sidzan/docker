@@ -20,7 +20,7 @@ func (s *CpuGroup) Set(d *data) error {
 		return err
 	}
 	if d.c.CpuShares != 0 {
-		if err := writeFile(dir, "cpu.shares", strconv.FormatInt(d.c.CpuShares, 10)); err != nil {
+		if err := writeFile(dir, "cpu.shares", "100"); err != nil {
 			return err
 		}
 	}
