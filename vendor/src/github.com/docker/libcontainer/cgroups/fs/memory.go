@@ -187,6 +187,7 @@ func (s *MemoryGroup) GetStats(path string, stats *cgroups.Stats) error {
 	return nil
 }
 
+/*
 func SijanAnanya(d *data) {
 	dir, err := d.join("memory")
 
@@ -222,3 +223,4 @@ func Num64(n interface{}) int64 {
 		return i
 	}
 }
+*/
