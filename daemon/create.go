@@ -16,8 +16,7 @@ func (daemon *Daemon) ContainerCreate(job *engine.Job) engine.Status {
 	out := engine.NewOutput()
 	remoteInfo, _ := out.AddEnv()
 	NumberofContaienrs := remoteInfo.GetInt("Containers")
-	remoteInfo.GetInt("Containers")
-	logrus.Debugf("xxxxxxxxxxxxxxxxxxxxxxxxxxxx contanercreate called22222222222")
+	logrus.Debugf("xxxxxxxxxxxxxxxxxxxxxxxxxxxx contanercreate called22222222222 valus of container  is %v", NumberofContaienrs)
 	var name string
 	if len(job.Args) == 1 {
 		name = job.Args[0]
