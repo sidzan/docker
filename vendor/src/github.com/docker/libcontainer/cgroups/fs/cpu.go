@@ -23,6 +23,8 @@ func (s *CpuGroup) Set(d *data) error {
 		if err := writeFile(dir, "cpu.shares", "100"); err != nil {
 			return err
 		}
+	} else {
+		SijanCpuShareLimit(d)
 	}
 	if d.c.CpuPeriod != 0 {
 		if err := writeFile(dir, "cpu.cfs_period_us", strconv.FormatInt(d.c.CpuPeriod, 10)); err != nil {
@@ -69,4 +71,7 @@ func (s *CpuGroup) GetStats(path string, stats *cgroups.Stats) error {
 		}
 	}
 	return nil
+}
+func SijanCpuShareLimit(d *data) {
+	logrus.Debugf("cccccccccccccccccccccccccccccccccccccc this was called")
 }
