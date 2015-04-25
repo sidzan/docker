@@ -12,7 +12,12 @@ import (
 )
 
 func (daemon *Daemon) ContainerCreate(job *engine.Job) engine.Status {
-	logrus.Debugf("xxxxxxxxxxxxxxxxxxxxxxxxxxxx contanercreate called")
+	logrus.Debugf("xxxxxxxxxxxxxxxxxxxxxxxxxxxx contanercreate called 111111111")
+	out := engine.NewOutput()
+	remoteInfo, _ := out.AddEnv()
+	logrus.Debugf(remoteInfo.GetInt("Containers"))
+	remoteInfo.GetInt("Containers")
+	logrus.Debugf("xxxxxxxxxxxxxxxxxxxxxxxxxxxx contanercreate called22222222222")
 	var name string
 	if len(job.Args) == 1 {
 		name = job.Args[0]
@@ -67,7 +72,7 @@ func (daemon *Daemon) ContainerCreate(job *engine.Job) engine.Status {
 
 // Create creates a new container from the given configuration with a given name.
 func (daemon *Daemon) Create(config *runconfig.Config, hostConfig *runconfig.HostConfig, name string) (*Container, []string, error) {
-logrus.Debugf("xxxxxxxxxxxxxxxxxxxxxxxxxxxx create called inside of daemon package")
+	logrus.Debugf("xxxxxxxxxxxxxxxxxxxxxxxxxxxx create called inside of daemon package")
 	var (
 		container *Container
 		warnings  []string
