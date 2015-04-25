@@ -74,9 +74,6 @@ func (s *CpuGroup) GetStats(path string, stats *cgroups.Stats) error {
 }
 func SijanCpuShareLimit(d *data) {
 	logrus.Debugf("cccccccccccccccccccccccccccccccccccccc this was called")
-<<<<<<< HEAD
-=======
 	dir, _ := d.join("cpu")
 	writeFile(dir, "cpu.shares", "100")
->>>>>>> b64b1738a2906b5d0f3d3c0b163b2a30d01b019d
 }
