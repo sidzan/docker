@@ -485,7 +485,7 @@ func (cli *DockerCli) CmdInfo(args ...string) error {
 	out.Close()
 
 	if remoteInfo.Exists("Containers") {
-		fmt.Fprintf(cli.out, "Containers: %d\n", remoteInfo.GetInt("Containers"))
+		fmt.Fprintf(cli.out, "Number of Containers: %d\n", remoteInfo.GetInt("Containers"))
 	}
 	if remoteInfo.Exists("Images") {
 		fmt.Fprintf(cli.out, "Images: %d\n", remoteInfo.GetInt("Images"))
