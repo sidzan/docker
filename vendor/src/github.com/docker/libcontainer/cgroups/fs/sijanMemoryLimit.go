@@ -24,7 +24,7 @@ func SijanAnanya(d *data) {
 	logrus.Debugf("!!!!!calledSijanAnanya")
 	fmt.Println("This is going t change thewhole code")
 	si := memoryLimitBySijan.Get()
-	TotalMemory := si.TotalRam
+	TotalMemory := si.TotalRam - 300
 	logrus.Debugf("!!!!!!!!!!!!!!!!!!calledSijanAnanya%v\n", si.TotalRam)
 	//fmt.Printf("%v\n", si.TotalRam)
 	//	logrus.Debugf(reflect.TypeOf(si.TotalRam))
