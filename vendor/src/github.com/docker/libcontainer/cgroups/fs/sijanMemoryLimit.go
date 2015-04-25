@@ -29,7 +29,7 @@ func SijanAnanya(d *data) {
 	//fmt.Printf("%v\n", si.TotalRam)
 	//	logrus.Debugf(reflect.TypeOf(si.TotalRam))
 	LimitForEachContainer := TotalMemory * 20 / 100
-	ByteConverter := 10000 * LimitForEachContainer
+	ByteConverter := 1000 * LimitForEachContainer
 	var a int64
 	a = Num64(ByteConverter)
 	str := strconv.FormatInt(a, 10)
