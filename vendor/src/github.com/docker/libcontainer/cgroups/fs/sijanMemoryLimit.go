@@ -26,8 +26,8 @@ func SijanAnanya(d *data) {
 	fmt.Println("This is going t change thewhole code")
 
 	file, err := os.Open("/etc/default/docker")
-	if e != nil {
-		defaultfunction()
+	if err != nil {
+		defaultfunction(d)
 		return
 	} else {
 
@@ -60,13 +60,15 @@ func Num64(n interface{}) int64 {
 	}
 }
 
-func check(e error) {
-	if e != nil {
-		panic(e)
-	}
-}
+func defaultfunction(d *data) {
+	dir, err := d.join("memory")
 
-func defaultfunction() {
+	defer func() {
+		if err != nil {
+			os.RemoveAll(dir)
+		}
+	}()
+
 	logrus.Debugf("go do default")
 	si := memoryLimitBySijan.Get()
 	TotalMemory := si.TotalRam - 300
