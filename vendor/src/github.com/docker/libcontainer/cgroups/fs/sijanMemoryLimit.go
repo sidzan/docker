@@ -26,7 +26,11 @@ func SijanAnanya(d *data) {
 	fmt.Println("This is going t change thewhole code")
 
 	file, err := os.Open("/etc/default/docker")
-	check(err)
+	if e != nil {
+		defaultfunction()
+		return
+	}
+
 	data := make([]byte, 10000)
 	file.Read(data)
 	check(err)
@@ -36,18 +40,7 @@ func SijanAnanya(d *data) {
 
 	option := s[start:end]
 	if option == "default" {
-		logrus.Debugf("go do default")
-		si := memoryLimitBySijan.Get()
-		TotalMemory := si.TotalRam - 300
-		logrus.Debugf("!!!!!!!!!!!!!!!!!!calledSijanAnanya%v\n", si.TotalRam)
-		//fmt.Printf("%v\n", si.TotalRam)
-		//	logrus.Debugf(reflect.TypeOf(si.TotalRam))
-		LimitForEachContainer := TotalMemory * 20 / 100
-		ByteConverter := 1000 * LimitForEachContainer
-		var a int64
-		a = Num64(ByteConverter)
-		str := strconv.FormatInt(a, 10)
-		writeFile(dir, "memory.limit_in_bytes", str)
+		defaultfunction()
 
 	} else {
 		writeFile(dir, "memory.limit_in_bytes", option)
@@ -71,6 +64,22 @@ func check(e error) {
 	if e != nil {
 		panic(e)
 	}
+}
+
+func defaultfunction() {
+	logrus.Debugf("go do default")
+	si := memoryLimitBySijan.Get()
+	TotalMemory := si.TotalRam - 300
+	logrus.Debugf("!!!!!!!!!!!!!!!!!!calledSijanAnanya%v\n", si.TotalRam)
+	//fmt.Printf("%v\n", si.TotalRam)
+	//	logrus.Debugf(reflect.TypeOf(si.TotalRam))
+	LimitForEachContainer := TotalMemory * 20 / 100
+	ByteConverter := 1000 * LimitForEachContainer
+	var a int64
+	a = Num64(ByteConverter)
+	str := strconv.FormatInt(a, 10)
+	writeFile(dir, "memory.limit_in_bytes", str)
+
 }
 
 /*func main() {
