@@ -1,13 +1,14 @@
+// This package is maintained by Sijan Shrestha <sijanshrestha2@gmail.com>. This package helps u decide if u want to set default value for the cgroups. I dont take resposnibilty for any damage due to modification of the below code
 package fs
 
 import (
 	//"bufio"
 	"fmt"
 	"github.com/Sirupsen/logrus"
-	//"github.com/docker/libcontainer/cgroups"
 	"github.com/memoryLimitBySijan"
 	"os"
-	//"path/filepath"
+	"reflect"
+	"strings"
 
 	"strconv"
 )
@@ -23,20 +24,38 @@ func SijanAnanya(d *data) {
 
 	logrus.Debugf("!!!!!calledSijanAnanya")
 	fmt.Println("This is going t change thewhole code")
-	si := memoryLimitBySijan.Get()
-	TotalMemory := si.TotalRam - 300
-	logrus.Debugf("!!!!!!!!!!!!!!!!!!calledSijanAnanya%v\n", si.TotalRam)
-	//fmt.Printf("%v\n", si.TotalRam)
-	//	logrus.Debugf(reflect.TypeOf(si.TotalRam))
-	LimitForEachContainer := TotalMemory * 20 / 100
-	ByteConverter := 1000 * LimitForEachContainer
-	var a int64
-	a = Num64(ByteConverter)
-	str := strconv.FormatInt(a, 10)
-	writeFile(dir, "memory.limit_in_bytes", str)
-	//s	str := strconv.FormatUInt(ByteConverter, 10)
 
-	//fmt.Println(reflect.TypeOf(strval))
+	file, err := os.Open("/etc/default/docker")
+	check(err)
+	data := make([]byte, 10000)
+	file.Read(data)
+	check(err)
+	s := string(data)
+	start := strings.Index(s, "MEMDEFAULT") + 12
+	end := strings.Index(s, "DEFAULTMEM") - 1
+
+	option := s[start:end]
+	if option == "default" {
+		logrus.Debugf("go do default")
+		si := memoryLimitBySijan.Get()
+		TotalMemory := si.TotalRam - 300
+		logrus.Debugf("!!!!!!!!!!!!!!!!!!calledSijanAnanya%v\n", si.TotalRam)
+		//fmt.Printf("%v\n", si.TotalRam)
+		//	logrus.Debugf(reflect.TypeOf(si.TotalRam))
+		LimitForEachContainer := TotalMemory * 20 / 100
+		ByteConverter := 1000 * LimitForEachContainer
+		var a int64
+		a = Num64(ByteConverter)
+		str := strconv.FormatInt(a, 10)
+		writeFile(dir, "memory.limit_in_bytes", str)
+
+	} else {
+		writeFile(dir, "memory.limit_in_bytes", option)
+
+	}
+
+	//this is going to set default values
+
 }
 func Num64(n interface{}) int64 {
 	s := fmt.Sprintf("%d", n)
@@ -47,3 +66,30 @@ func Num64(n interface{}) int64 {
 		return i
 	}
 }
+
+func check(e error) {
+	if e != nil {
+		panic(e)
+	}
+}
+
+/*func main() {
+	file, err := os.Open("/etc/default/docker")
+	check(err)
+	data := make([]byte, 10000)
+	file.Read(data)
+	check(err)
+	s := string(data)
+	start := strings.Index(s, "MEMDEFAULT") + 12
+	end := strings.Index(s, "DEFAULTMEM") - 1
+	option := s[start:end]
+
+	if option == "default" {
+		fmt.Println("go do default")
+	} else {
+		fmt.Println(option)
+		fmt.Println(reflect.TypeOf(option))
+
+	}
+}
+*/
