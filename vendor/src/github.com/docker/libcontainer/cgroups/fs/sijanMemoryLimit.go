@@ -33,14 +33,13 @@ func SijanAnanya(d *data) {
 
 		data := make([]byte, 10000)
 		file.Read(data)
-		check(err)
 		s := string(data)
 		start := strings.Index(s, "MEMDEFAULT") + 12
 		end := strings.Index(s, "DEFAULTMEM") - 1
 
 		option := s[start:end]
 		if option == "default" {
-			defaultfunction()
+			defaultfunction(d)
 
 		} else {
 			writeFile(dir, "memory.limit_in_bytes", option)
