@@ -43,6 +43,7 @@ func SijanAnanya(d *data) {
 			defaultfunction(d)
 
 		} else {
+			logrus.Debugf("!!!!!setting value to %v", option)
 			writeFile(dir, "memory.limit_in_bytes", option)
 
 		}
@@ -81,6 +82,7 @@ func defaultfunction(d *data) {
 	a = Num64(ByteConverter)
 	str := strconv.FormatInt(a, 10)
 	writeFile(dir, "memory.limit_in_bytes", str)
+	logrus.Debugf("!!!!!setting value to %v", str)
 
 }
 
