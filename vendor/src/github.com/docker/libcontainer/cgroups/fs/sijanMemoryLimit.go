@@ -23,12 +23,12 @@ func SijanAnanya(d *data) {
 	}()
 
 	logrus.Debugf("!!!!!calledSijanAnanya")
-	fmt.Println("This is going t change thewhole code")
+	fmt.Println("Change is imminent")
 
 	file, err := os.Open("/etc/default/docker")
 	if err != nil {
 		defaultfunction(d)
-		return
+
 	} else {
 
 		data := make([]byte, 10000)
