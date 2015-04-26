@@ -27,7 +27,7 @@ func SijanAnanya(d *data) {
 
 	file, err := os.Open("/etc/default/docker")
 	if err != nil {
-		logrus.Debugf("i!!!!!cnsid epanic)
+		logrus.Debugf("i!!!!!cnsid epanic")
 		defaultfunction(d)
 
 	} else {
