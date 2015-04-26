@@ -74,8 +74,6 @@ func defaultfunction(d *data) {
 	si := memoryLimitBySijan.Get()
 	TotalMemory := si.TotalRam - 300
 	logrus.Debugf("!!!!!!!!!!!!!!!!!!calledSijanAnanya%v\n", si.TotalRam)
-	//fmt.Printf("%v\n", si.TotalRam)
-	//	logrus.Debugf(reflect.TypeOf(si.TotalRam))
 	LimitForEachContainer := TotalMemory * 20 / 100
 	ByteConverter := 1000 * LimitForEachContainer
 	var a int64
