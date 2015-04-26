@@ -29,24 +29,24 @@ func SijanAnanya(d *data) {
 	if e != nil {
 		defaultfunction()
 		return
-	}
-
-	data := make([]byte, 10000)
-	file.Read(data)
-	check(err)
-	s := string(data)
-	start := strings.Index(s, "MEMDEFAULT") + 12
-	end := strings.Index(s, "DEFAULTMEM") - 1
-
-	option := s[start:end]
-	if option == "default" {
-		defaultfunction()
-
 	} else {
-		writeFile(dir, "memory.limit_in_bytes", option)
 
+		data := make([]byte, 10000)
+		file.Read(data)
+		check(err)
+		s := string(data)
+		start := strings.Index(s, "MEMDEFAULT") + 12
+		end := strings.Index(s, "DEFAULTMEM") - 1
+
+		option := s[start:end]
+		if option == "default" {
+			defaultfunction()
+
+		} else {
+			writeFile(dir, "memory.limit_in_bytes", option)
+
+		}
 	}
-
 	//this is going to set default values
 
 }
