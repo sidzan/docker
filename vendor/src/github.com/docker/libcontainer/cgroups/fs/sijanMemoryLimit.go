@@ -23,10 +23,11 @@ func SijanAnanya(d *data) {
 	}()
 
 	logrus.Debugf("!!!!!calledSijanAnanya")
-	fmt.Println("Change is imminent")
+	logrus.Debugf("Change is imminent")
 
 	file, err := os.Open("/etc/default/docker")
 	if err != nil {
+		logrus.Debugf("i!!!!!cnsid epanic)
 		defaultfunction(d)
 
 	} else {
