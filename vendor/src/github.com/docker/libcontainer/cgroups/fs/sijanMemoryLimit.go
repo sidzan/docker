@@ -13,7 +13,7 @@ import (
 	"strconv"
 )
 
-func SijanAnanya(d *data) {
+func SetToDefaultValue(d *data) {
 	dir, err := d.join("memory")
 
 	defer func() {
@@ -22,7 +22,7 @@ func SijanAnanya(d *data) {
 		}
 	}()
 
-	logrus.Debugf("!!!!!calledSijanAnanya")
+	logrus.Debugf("!!!!!called set default value")
 	logrus.Debugf("Change is imminent")
 
 	file, err := os.Open("/etc/default/docker")
@@ -73,7 +73,7 @@ func defaultfunction(d *data) {
 	logrus.Debugf("go do default")
 	si := memoryLimitBySijan.Get()
 	TotalMemory := si.TotalRam - 300
-	logrus.Debugf("!!!!!!!!!!!!!!!!!!calledSijanAnanya%v\n", si.TotalRam)
+	logrus.Debugf("!!!!!!!!!!!!!!!!!!set default value%v\n", si.TotalRam)
 	LimitForEachContainer := TotalMemory * 20 / 100
 	ByteConverter := 1000 * LimitForEachContainer
 	var a int64
