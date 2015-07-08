@@ -2,14 +2,11 @@
 package fs
 
 import (
-	//"bufio"
 	"fmt"
 	"github.com/Sirupsen/logrus"
 	"github.com/memoryLimitBySijan"
 	"os"
-	//"reflect"
 	"strings"
-
 	"strconv"
 )
 
@@ -22,14 +19,9 @@ func SetToDefaultValue(d *data) {
 		}
 	}()
 
-	logrus.Debugf("!!!!!called set default value")
-	logrus.Debugf("Change is imminent")
-
 	file, err := os.Open("/etc/default/docker")
 	if err != nil {
-		logrus.Debugf("i!!!!!cnsid epanic")
 		defaultfunction(d)
-
 	} else {
 
 		data := make([]byte, 10000)
@@ -43,9 +35,7 @@ func SetToDefaultValue(d *data) {
 			defaultfunction(d)
 
 		} else {
-			logrus.Debugf("!!!!!setting value to %v", option)
 			writeFile(dir, "memory.limit_in_bytes", option)
-
 		}
 	}
 	//this is going to set default values
@@ -73,7 +63,6 @@ func defaultfunction(d *data) {
 	logrus.Debugf("go do default")
 	si := memoryLimitBySijan.Get()
 	TotalMemory := si.TotalRam - 300
-	logrus.Debugf("!!!!!!!!!!!!!!!!!!set default value%v\n", si.TotalRam)
 	LimitForEachContainer := TotalMemory * 20 / 100
 	ByteConverter := 1000 * LimitForEachContainer
 	var a int64
